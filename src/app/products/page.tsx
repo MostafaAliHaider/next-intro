@@ -2,35 +2,39 @@
 
 import Products from '@/components/Products';
 import { ProductTypes } from '@/features/types';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
-const pageProducts =  async () => {
+const pageProducts =   () => {
     
-    const [newProduct, setNewProduct] = useState('')
-    // const [product, setProduct] = useState()
-    // useEffect(()=>{
+    const [product, setProduct] = useState('')
+    const [title, setTitle] = useState()
+    const [category, setCategory] = useState()
+    const [price, setPrice] = useState()
+    const [state, setState] = useState([]);
 
-    //     const bringProducts = async () =>{
+    
 
-          
-    //     }
-    //     bringProducts();
-        
-    // },[])
-    const getProducts = await fetch(
-        `http://localhost:3000/api/products`,
-        {
-            method: "get",
-        },
-    )
- //const allProducts: ProductTypes[]= await getProducts.json()
-        const products= await getProducts.json()
-        console.log(products.data);
+
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const response = await fetch('http://localhost:3000/api/products');
+            const data = await response.json();
+            setProduct(data.data); // Update the products state
+            console.log(data.data); // Log the data
+          } catch (error) {
+            console.error('Error fetching products:', error);
+          }
+        };
+    
+        fetchData();
+      }, []);
+    //const allProducts: ProductTypes[]= await getProducts.json()
  //setProduct(products.data)
   
     //console.log(product);
 
-    async function postData(url = "http://localhost:3000/api/products", data = {}){
+    async function postData(url = "http://localhost:3000/api/products",){
         const response = await fetch(url, {
             method: "POST",
             headers: {
@@ -48,12 +52,17 @@ const pageProducts =  async () => {
     // }
     
     return (
-    <div className='grid grid-cols-3 w-full bg-slate-200 p-20'> 
-        <input type="text" value={newProduct} onChange={e => setNewProduct(e.target.value)}
-        />
-        <button onClick={() => postData}>Submit product</button>
-        <Products product={products.data}/>
-    </div>
+    
+       <div>
+            <div className='grid grid-cols-3 w-full bg-slate-200 p-20'> 
+                    <input type="text" value={title} onChange={e => setTitle(e.target.value)}
+                    />
+                    {/* <button onClick={() => postData}>Submit product</button> */}
+                </div>
+
+           {/* <section className='flex gap-4'><Products product={product}/></section> */}
+
+       </div>
   )
 }
 

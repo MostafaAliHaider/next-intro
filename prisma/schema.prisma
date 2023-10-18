@@ -7,12 +7,13 @@ generator client {
 
 datasource db {
   provider = "sqlite"
-  url      = env("DATABASE_URL")
+  url      = "file:./dev.db"
 }
 
 // TODO: Delete
-model User {
+model Product {
   id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
+  title String  @unique
+  category String
+  price  Int
 }

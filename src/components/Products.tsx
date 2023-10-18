@@ -9,7 +9,7 @@ const Products = ({product}: ProductTypes[]) => {
         {
         
             product?.map((product: ProductTypes) => {
-                return <article key={product.id}>
+                return <article key={product.id} className='bg-red-200'>
                     <div>
                     <h2>{product.category}</h2>
                     </div>
