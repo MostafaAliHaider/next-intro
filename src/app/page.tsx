@@ -1,3 +1,3 @@
 export default function Home() {
-  return <div>Kode her</div>
+  return <div>Hei Tommy, denne gangen kan du forvente bedre styling imotsetning til sist :D</div>
 }
